@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'counter_view_model.dart';
 
 class CounterScreen extends StatefulWidget {
   @override
@@ -8,23 +11,27 @@ class CounterScreen extends StatefulWidget {
 class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        title: Text('Counter'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          '1',
-          style: TextStyle(fontSize: 36.0),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => print('boop'),
-        backgroundColor: Colors.blueAccent,
-        child: Icon(Icons.add),
-      ),
+    return Consumer<CounterViewModel>(
+      builder: (_, viewModel, __) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.blueAccent,
+            title: Text('Counter'),
+            centerTitle: true,
+          ),
+          body: Center(
+            child: Text(
+              viewModel.count.toString(),
+              style: TextStyle(fontSize: 36.0),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: viewModel.increment,
+            backgroundColor: Colors.blueAccent,
+            child: Icon(Icons.add),
+          ),
+        );
+      },
     );
   }
 }
