@@ -25,10 +25,15 @@ class _CounterScreenState extends State<CounterScreen> {
               style: TextStyle(fontSize: 36.0),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: viewModel.increment,
-            backgroundColor: Colors.blueAccent,
-            child: Icon(Icons.add),
+          // this is weird, but just for example
+          // thought FAB's had longpresses
+          floatingActionButton: InkWell(
+            onLongPress: () => viewModel.bigIncrement(),
+            child: FloatingActionButton(
+              onPressed: viewModel.increment,
+              backgroundColor: Colors.blueAccent,
+              child: Icon(Icons.add),
+            ),
           ),
         );
       },
